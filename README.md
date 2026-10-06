@@ -105,10 +105,14 @@ Extend the lists in `.agent-env-guard.json`, looked up from the working director
 
 ## Limits
 
-This guards against accidental leaks, not a determined agent:
+This guards against accidental leaks, not a determined agent. An agent that can run commands and really wants a secret will get it: the guard sees tool arguments and tool output, not what a process does at runtime. What it stops is the common case, an agent casually reading `.env`, dumping config or grepping the project and sending the values to the model provider. To keep secrets from an agent that is actively working around the guard, keep them out of the working tree (a secret manager that injects values at runtime) or run the agent in an OS-level sandbox without access to them.
+
+Known ways around it:
 
 - masking matches exact values; a command that re-encodes a file (`od -c`, `xxd`, `base64`) prints the secret in a form that is not masked. In testing a model did exactly this to work around a masked line;
 - a command that builds a file name at runtime (`cat $(printf '.e%s' nv)`) is not blocked, though `.env` values in its output are still masked;
+- a script the agent writes and then runs (`python check.py` that opens `.npmrc`) is not blocked: the protected name is in the file, not in the command;
+- a secret sent over the network (`curl` in a script) never appears in tool output, so there is nothing to mask;
 - secrets that exist only outside the project `.env` files (container environment, remote config) are not known to the guard;
 - the guard sees what the agent's hook API exposes: hosted tools such as Codex web search, and OpenCode subagents, are not covered.
 
