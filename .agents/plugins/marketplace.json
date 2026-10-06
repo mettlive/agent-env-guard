@@ -1,0 +1,20 @@
+{
+  "name": "agent-env-guard",
+  "interface": {
+    "displayName": "agent-env-guard"
+  },
+  "plugins": [
+    {
+      "name": "agent-env-guard",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Security"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "agent-env-guard",
+  "description": "Secrets guard for coding agents",
+  "owner": {
+    "name": "mettlive"
+  },
+  "plugins": [
+    {
+      "name": "agent-env-guard",
+      "source": "./",
+      "description": "Blocks agent access to secrets files and masks .env values in tool output",
+      "version": "1.0.0",
+      "category": "security"
+    }
+  ]
+}

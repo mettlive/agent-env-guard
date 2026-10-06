@@ -1,0 +1,53 @@
+{
+  "name": "agent-env-guard",
+  "version": "1.0.0",
+  "description": "Keeps secrets files away from coding agents and masks .env values in tool output: oh-my-pi, Claude Code, Codex CLI, OpenCode",
+  "type": "module",
+  "license": "MIT",
+  "author": "mettlive",
+  "homepage": "https://github.com/mettlive/agent-env-guard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mettlive/agent-env-guard.git"
+  },
+  "bugs": "https://github.com/mettlive/agent-env-guard/issues",
+  "keywords": [
+    "claude-code",
+    "codex",
+    "opencode",
+    "oh-my-pi",
+    "omp",
+    "hooks",
+    "dotenv",
+    "secrets",
+    "security"
+  ],
+  "exports": {
+    ".": "./dist/opencode.js"
+  },
+  "files": [
+    "src",
+    "dist",
+    "hooks",
+    ".claude-plugin",
+    ".codex-plugin",
+    ".agents",
+    ".omp-plugin"
+  ],
+  "scripts": {
+    "build": "esbuild src/adapters/hook-cli.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/hook.mjs && esbuild src/adapters/opencode.ts --bundle --platform=node --format=esm --target=node18 --outfile=dist/opencode.js",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --no-warnings --test 'test/*.test.ts'"
+  },
+  "omp": {
+    "extensions": [
+      "./src/adapters/omp.ts"
+    ]
+  },
+  "devDependencies": {
+    "@oh-my-pi/pi-coding-agent": "^18.6.0",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

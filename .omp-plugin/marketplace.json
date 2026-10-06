@@ -1,0 +1,21 @@
+{
+  "name": "agent-env-guard",
+  "owner": {
+    "name": "mettlive"
+  },
+  "plugins": [
+    {
+      "name": "agent-env-guard",
+      "source": "./",
+      "description": "Blocks agent access to secrets files and masks .env values in tool output",
+      "version": "1.0.0",
+      "author": {
+        "name": "mettlive"
+      },
+      "homepage": "https://github.com/mettlive/agent-env-guard",
+      "license": "MIT",
+      "category": "security",
+      "keywords": ["dotenv", "secrets", "security"]
+    }
+  ]
+}
